@@ -20,10 +20,9 @@ class ScriptViewCreator
     public function create(View $view): ?View
     {
         if (
-            $this->facebookPixel->isEnabled() &&
-            (
-                empty($this->facebookPixel->pixelId()) || empty($this->facebookPixel->pixelIds())
-            )
+            $this->facebookPixel->isEnabled()
+            && empty($this->facebookPixel->pixelId())
+            && empty($this->facebookPixel->pixelIds())
         ) {
             throw new Exception('You need to set a Facebook Pixel Id or ids in .env file.');
         }
