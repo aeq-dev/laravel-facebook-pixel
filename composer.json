@@ -64,7 +64,5 @@
                 "Bkfdev\\FacebookPixel\\FacebookPixelServiceProvider"
             ]
         }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    }
 }
