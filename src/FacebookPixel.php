@@ -2,6 +2,7 @@
 
 namespace Bkfdev\FacebookPixel;
 
+use App\Models\Store;
 use Exception;
 use FacebookAds\Api;
 use FacebookAds\Logger\CurlLogger;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Traits\Macroable;
-use App\Models\Store;
 
 class FacebookPixel
 {
@@ -167,7 +167,7 @@ class FacebookPixel
      */
     public function send(string $eventName, string $eventID, CustomData $customData, ?UserData $userData = null): ?EventResponse
     {
-        if (!$this->isEnabled()) {
+        if (! $this->isEnabled()) {
             return null;
         }
         if (empty($this->token())) {
