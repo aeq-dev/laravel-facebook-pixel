@@ -1,17 +1,15 @@
 # Facebook Pixel integration for Laravel
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/combindma/laravel-facebook-pixel.svg?style=flat-square)](https://packagist.org/packages/combindma/laravel-facebook-pixel)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/combindma/laravel-facebook-pixel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/combindma/laravel-facebook-pixel/actions?query=workflow%3ATests+branch%3Amaster)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/combindma/laravel-facebook-pixel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/combindma/laravel-facebook-pixel/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/combindma/laravel-facebook-pixel.svg?style=flat-square)](https://packagist.org/packages/combindma/laravel-facebook-pixel)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/aeq-dev/laravel-facebook-pixel.svg?style=flat-square)](https://packagist.org/packages/aeq-dev/laravel-facebook-pixel)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/aeq-dev/laravel-facebook-pixel/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/aeq-dev/laravel-facebook-pixel/actions?query=workflow%3ATests+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/aeq-dev/laravel-facebook-pixel/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/aeq-dev/laravel-facebook-pixel/actions?query=workflow%3A"Check+%26+fix+styling"+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/aeq-dev/laravel-facebook-pixel.svg?style=flat-square)](https://packagist.org/packages/aeq-dev/laravel-facebook-pixel)
 
 A Complete Facebook Pixel implementation for your Laravel application.
 
 ## Introduction
 
 This package provides a smooth integration of Meta Pixel, along with a straightforward implementation of the latest Conversions API, enhancing your overall experience.
-
-
 
 ## Pre-requisites
 
@@ -24,20 +22,19 @@ To get started with the pixel Meta, you must have a Meta pixel registered: <a hr
 If you plan to use Conversions API then you need to:
 
 #### Obtain An Access Token
+
 To use the Conversions API, you need to generate an access token, which will be passed as a parameter in every API call.
 
-Refer to 
+Refer to
 <a href="https://developers.facebook.com/docs/marketing-api/conversions-api/get-started" target="_blank">
 Conversions API Guide</a> to learn more.
-
-
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require combindma/laravel-facebook-pixel
+composer require bkfdev/laravel-facebook-pixel
 ```
 
 You can publish the config file with:
@@ -69,7 +66,7 @@ return [
      * Enable or disable script rendering. Useful for local development.
      */
     'enabled' => env('FACEBOOK_PIXEL_ENABLED', false),
-    
+
     /*
      * This is used to test server events
      */
@@ -84,10 +81,10 @@ If you plan on using the [flash-functionality](#flashing-data-for-the-next-reque
 protected $middleware = [
     ...
     \Illuminate\Session\Middleware\StartSession::class,
-    \Combindma\FacebookPixel\FacebookPixelMiddleware::class,
+    \Bkfdev\FacebookPixel\FacebookPixelMiddleware::class,
     ...
 ];
-``` 
+```
 
 ## Usage - Meta Pixel
 
@@ -98,19 +95,20 @@ Insert head view after opening head tag, and body view after opening body tag
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-    @include('facebookpixel::head')
-</head>
-<body>
-    @include('facebookpixel::body')
-</body>
+    <head>
+        @include('facebookpixel::head')
+    </head>
+    <body>
+        @include('facebookpixel::body')
+    </body>
+</html>
 ```
 
 Your events will also be rendered here. To add an event, use the `track()` function.
 
 ```php
 // CheckoutController.php
-use Combindma\FacebookPixel\Facades\FacebookPixel;
+use Bkfdev\FacebookPixel\Facades\FacebookPixel;
 
 public function index()
 {
@@ -140,14 +138,13 @@ You can also specify a unique event ID for any of your events so that, if you pl
 FacebookPixel::track('Purchase', ['currency' => 'USD', 'value' => 30.00], '123456');
 ```
 
-
 #### Flashing data for the next request
 
 The package can also set event to render on the next request. This is useful for setting data after an internal redirect.
 
 ```php
 // ContactController.php
-use Combindma\FacebookPixel\Facades\FacebookPixel;
+use Bkfdev\FacebookPixel\Facades\FacebookPixel;
 
 public function postContact()
 {
@@ -188,7 +185,7 @@ After a form submit, the following event will be parsed on the contact page:
 ### Available Methods
 
 ```php
-use Combindma\FacebookPixel\Facades\FacebookPixel;
+use Bkfdev\FacebookPixel\Facades\FacebookPixel;
 
 // Retrieve your Pixel id
 $id = FacebookPixel::pixelId();
@@ -202,7 +199,7 @@ FacebookPixel::disable();
 // Add event to the event layer (automatically renders right before the pixel script). Setting new values merges them with the previous ones.
 FacebookPixel::track('eventName', ['attribute' => 'value']);
 FacebookPixel::track('eventName', ['attribute' => 'value'], 'event_id'); //with an event id
-FacebookPixel::track('eventName'); //without properties 
+FacebookPixel::track('eventName'); //without properties
 FacebookPixel::track('eventName', [], 'event_id'); //with an event id but without properties
 // Flash event for the next request. Setting new values merges them with the previous ones.
 FacebookPixel::flashEvent('eventName', ['attribute' => 'value']);
@@ -217,7 +214,7 @@ FacebookPixel::clear();
 You can also track a specific custom event on your website. This feature is not available for flashed events.
 
 ```php
-use Combindma\FacebookPixel\Facades\FacebookPixel;
+use Bkfdev\FacebookPixel\Facades\FacebookPixel;
 
 // In your controller
 FacebookPixel::trackCustom('CUSTOM-EVENT-NAME', ['custom_parameter' => 'ABC', 'value' => 10.00, 'currency' => 'USD']);
@@ -270,7 +267,7 @@ This package provides by default advanced matching. We retrieve the email and th
 Adding events to pages can become a repetitive process. Since this package isn't supposed to be opinionated on what your events should look like, the FacebookPixel is macroable.
 
 ```php
-use Combindma\FacebookPixel\Facades\FacebookPixel;
+use Bkfdev\FacebookPixel\Facades\FacebookPixel;
 
 //include this in your macrobale file
 FacebookPixel::macro('purchase', function ($product) {
@@ -284,7 +281,6 @@ FacebookPixel::macro('purchase', function ($product) {
 FacebookPixel::purchase($product);
 ```
 
-
 ## Usage - Conversions API
 
 If you plan on using [Conversions API](https://developers.facebook.com/docs/marketing-api/conversions-api/get-started) functionalities. Yous should specify the token in your .env file first.
@@ -294,7 +290,7 @@ For every request yous should specify a unique event id for handling Pixel Dupli
 This is how you can start:
 
 ```php
-use Combindma\FacebookPixel\Facades\FacebookPixel;
+use Bkfdev\FacebookPixel\Facades\FacebookPixel;
 use FacebookAds\Object\ServerSide\Content;
 use FacebookAds\Object\ServerSide\CustomData;
 use FacebookAds\Object\ServerSide\DeliveryCategory;
@@ -308,14 +304,14 @@ $content = (new Content())
     ->setProductId('product123')
     ->setQuantity(1)
     ->setDeliveryCategory(DeliveryCategory::HOME_DELIVERY);
-    
+
 $custom_data = (new CustomData())
     ->setContents(array($content))
     ->setCurrency('usd')
     ->setValue(123.45);
-    
+
 $eventId = uniqid('prefix_');
-    
+
 //send request
 FacebookPixel::send('Purchase', $eventId ,$custom_data, $user_data);
 ```
@@ -327,7 +323,7 @@ We use the user id as a same external_id in Meta Pixel and conversions API
 FacebookPixel::send('Purchase', $eventId, $custom_data);
 ```
 
-If you want to test server events, you need to specify the FACEBOOK_TEST_EVENT_CODE in your .env file. By default, this test code will be sent in all API request. 
+If you want to test server events, you need to specify the FACEBOOK_TEST_EVENT_CODE in your .env file. By default, this test code will be sent in all API request.
 
 So Don't forget to delete after you finish your server tests.
 
@@ -349,8 +345,8 @@ Please review [our security policy](../../security/policy) on how to report secu
 
 ## Credits
 
-- [Combind](https://github.com/Combindma)
-- [All Contributors](../../contributors)
+-   [Bkfdev](https://github.com/aeq-dev)
+-   [All Contributors](../../contributors)
 
 ## License
 
