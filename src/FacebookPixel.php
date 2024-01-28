@@ -47,22 +47,19 @@ class FacebookPixel
     {
         $store = Store::find(session()->get('store_id'));
         if ($store && $store->settings()->get('enable_facebook_pixel')) {
+
             $this->enabled = $store->settings()->get('enable_facebook_pixel');
             $this->pixelId = $store->settings()->get('facebook_pixel_id');
             $this->pixelIds = $store->settings()->get('facebook_pixel_ids');
-            $this->token = $store->settings()->get('token');
-            $this->sessionKey = $store->settings()->get('sessionKey');
-            $this->testEventCode = $store->settings()->get('test_event_code');
 
         } else {
             $this->enabled = config('facebook-pixel.enabled');
             $this->pixelId = config('facebook-pixel.facebook_pixel_id');
             $this->pixelIds = config('facebook-pixel.facebook_pixel_ids');
-            $this->token = config('facebook-pixel.token');
-            $this->sessionKey = config('facebook-pixel.sessionKey');
-            $this->testEventCode = config('facebook-pixel.test_event_code');
         }
-
+        $this->token = config('facebook-pixel.token');
+        $this->sessionKey = config('facebook-pixel.sessionKey');
+        $this->testEventCode = config('facebook-pixel.test_event_code');
         $this->eventLayer = new EventLayer();
         $this->customEventLayer = new EventLayer();
         $this->flashEventLayer = new EventLayer();
@@ -167,7 +164,7 @@ class FacebookPixel
      */
     public function send(string $eventName, string $eventID, CustomData $customData, ?UserData $userData = null): ?EventResponse
     {
-        if (! $this->isEnabled()) {
+        if (!$this->isEnabled()) {
             return null;
         }
         if (empty($this->token())) {
