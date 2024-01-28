@@ -25,9 +25,9 @@ class FacebookPixel
 
     private bool $enabled;
 
-    private string $pixelId;
+    private ?string $pixelId;
 
-    private array $pixelIds;
+    private ?array $pixelIds;
 
     private ?string $token;
 
