@@ -14,7 +14,7 @@ return [
     /*
      * The key under which data is saved to the session with flash.
      */
-    'sessionKey' => env('FACEBOOK_PIXEL_SESSION_KEY', config('app.name') . '_facebookPixel'),
+    'sessionKey' => env('FACEBOOK_PIXEL_SESSION_KEY', config('app.name').'_facebookPixel'),
 
     /*
      * To use the Conversions API, you need an access token. For Documentation please see: https://developers.facebook.com/docs/marketing-api/conversions-api/get-started

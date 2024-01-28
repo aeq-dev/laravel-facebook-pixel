@@ -17,10 +17,10 @@ class FacebookPixelServiceProvider extends PackageServiceProvider
 
     public function packageBooted()
     {
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'facebookpixel');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'facebookpixel');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/bkfdev'),
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/bkfdev'),
         ], 'views');
 
         View::creator(
