@@ -45,11 +45,11 @@ it('can track events', function () {
     expect($eventLayer)->toBeInstanceOf(EventLayer::class)
         ->and($eventLayer->toArray())->toHaveKey('TestEvent')
         ->and($eventLayer->toArray())->toBe([
-                'TestEvent' => [
-                    'data' => ['param1' => 'value1'],
-                    'event_id' => null,
-                ],
-            ]);
+            'TestEvent' => [
+                'data' => ['param1' => 'value1'],
+                'event_id' => null,
+            ],
+        ]);
 });
 
 it('can track events with event id', function () {
@@ -58,11 +58,11 @@ it('can track events with event id', function () {
     expect($eventLayer)->toBeInstanceOf(EventLayer::class)
         ->and($eventLayer->toArray())->toHaveKey('TestEvent')
         ->and($eventLayer->toArray())->toBe([
-                'TestEvent' => [
-                    'data' => ['param1' => 'value1'],
-                    'event_id' => 'event-id',
-                ],
-            ]);
+            'TestEvent' => [
+                'data' => ['param1' => 'value1'],
+                'event_id' => 'event-id',
+            ],
+        ]);
 });
 
 it('can track custom events', function () {
@@ -71,11 +71,11 @@ it('can track custom events', function () {
     expect($customEventLayer)->toBeInstanceOf(EventLayer::class)
         ->and($customEventLayer->toArray())->toHaveKey('CustomEvent')
         ->and($customEventLayer->toArray())->toBe([
-                'CustomEvent' => [
-                    'data' => ['customParam' => 'customValue'],
-                    'event_id' => null,
-                ],
-            ]);
+            'CustomEvent' => [
+                'data' => ['customParam' => 'customValue'],
+                'event_id' => null,
+            ],
+        ]);
 });
 
 it('can track custom events with event id', function () {
@@ -84,11 +84,11 @@ it('can track custom events with event id', function () {
     expect($customEventLayer)->toBeInstanceOf(EventLayer::class)
         ->and($customEventLayer->toArray())->toHaveKey('CustomEvent')
         ->and($customEventLayer->toArray())->toBe([
-                'CustomEvent' => [
-                    'data' => ['customParam' => 'customValue'],
-                    'event_id' => 'event-id',
-                ],
-            ]);
+            'CustomEvent' => [
+                'data' => ['customParam' => 'customValue'],
+                'event_id' => 'event-id',
+            ],
+        ]);
 });
 
 it('can flash events for the next request', function () {
@@ -96,11 +96,11 @@ it('can flash events for the next request', function () {
     $flashedEvent = $this->facebookPixel->getFlashedEvent();
     expect($flashedEvent)->toHaveKey('FlashEvent')
         ->and($flashedEvent)->toBe([
-                'FlashEvent' => [
-                    'data' => ['flashParam' => 'flashValue'],
-                    'event_id' => null,
-                ],
-            ]);
+            'FlashEvent' => [
+                'data' => ['flashParam' => 'flashValue'],
+                'event_id' => null,
+            ],
+        ]);
 });
 
 it('can flash events for the next request with event id', function () {
@@ -108,11 +108,11 @@ it('can flash events for the next request with event id', function () {
     $flashedEvent = $this->facebookPixel->getFlashedEvent();
     expect($flashedEvent)->toHaveKey('FlashEvent')
         ->and($flashedEvent)->toBe([
-                'FlashEvent' => [
-                    'data' => ['flashParam' => 'flashValue'],
-                    'event_id' => 'event-id',
-                ],
-            ]);
+            'FlashEvent' => [
+                'data' => ['flashParam' => 'flashValue'],
+                'event_id' => 'event-id',
+            ],
+        ]);
 });
 
 it('can merge event session data', function () {
@@ -173,5 +173,5 @@ it('throws an exception when token is not set', function () {
     $customData = new CustomData();
 
     // Expect an Exception with a specific message
-    expect(fn() => $this->facebookPixel->send($eventName, $eventId, $customData))->toThrow(Exception::class);
+    expect(fn () => $this->facebookPixel->send($eventName, $eventId, $customData))->toThrow(Exception::class);
 });

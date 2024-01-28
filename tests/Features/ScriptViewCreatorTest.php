@@ -16,7 +16,7 @@ test('it throws an exception when Facebook Pixel is enabled and pixelId is empty
 
     $view = Mockery::mock(View::class);
 
-    expect(fn() => $this->scriptViewCreator->create($view))->toThrow(Exception::class);
+    expect(fn () => $this->scriptViewCreator->create($view))->toThrow(Exception::class);
 });
 
 test('it throws an exception when Facebook Pixel is enabled and sessionKey is empty', function () {
@@ -26,5 +26,5 @@ test('it throws an exception when Facebook Pixel is enabled and sessionKey is em
 
     $view = Mockery::mock(View::class);
 
-    expect(fn() => $this->scriptViewCreator->create($view))->toThrow(Exception::class);
+    expect(fn () => $this->scriptViewCreator->create($view))->toThrow(Exception::class);
 });
