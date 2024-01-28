@@ -6,7 +6,7 @@
         "facebook-pixel",
         "laravel"
     ],
-    "homepage": "https://github.com/bkfdev/laravel-facebook-pixel",
+    "homepage": "https://github.com/aeq-dev/laravel-facebook-pixel",
     "license": "MIT",
     "authors": [
         {
@@ -64,5 +64,7 @@
                 "Bkfdev\\FacebookPixel\\FacebookPixelServiceProvider"
             ]
         }
-    }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
