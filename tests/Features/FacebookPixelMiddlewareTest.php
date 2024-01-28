@@ -1,7 +1,7 @@
 <?php
 
-use Combindma\FacebookPixel\FacebookPixel;
-use Combindma\FacebookPixel\FacebookPixelMiddleware;
+use Bkfdev\FacebookPixel\FacebookPixel;
+use Bkfdev\FacebookPixel\FacebookPixelMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Session\SessionManager;
 

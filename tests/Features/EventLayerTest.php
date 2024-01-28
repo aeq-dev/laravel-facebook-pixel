@@ -1,6 +1,6 @@
 <?php
 
-use Combindma\FacebookPixel\EventLayer;
+use Bkfdev\FacebookPixel\EventLayer;
 
 beforeEach(function () {
     $this->eventLayer = new EventLayer();

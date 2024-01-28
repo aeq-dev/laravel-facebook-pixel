@@ -1,8 +1,8 @@
 <?php
 
-namespace Combindma\FacebookPixel\Tests;
+namespace Bkfdev\FacebookPixel\Tests;
 
-use Combindma\FacebookPixel\FacebookPixelServiceProvider;
+use Bkfdev\FacebookPixel\FacebookPixelServiceProvider;
 use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra

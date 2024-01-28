@@ -1,6 +1,6 @@
 <?php
 
-namespace Combindma\FacebookPixel\Tests\Models;
+namespace Bkfdev\FacebookPixel\Tests\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
