@@ -1,13 +1,13 @@
 <?php
 
-namespace Combindma\FacebookPixel\Facades;
+namespace Bkfdev\FacebookPixel\Facades;
 
 use FacebookAds\Object\ServerSide\CustomData;
 use FacebookAds\Object\ServerSide\UserData;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Combindma\FacebookPixel\FacebookPixel
+ * @see \Bkfdev\FacebookPixel\FacebookPixel
  *
  * @method static pixelId()
  * @method static setPixelId(int|string $id)
@@ -24,6 +24,6 @@ class FacebookPixel extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return \Combindma\FacebookPixel\FacebookPixel::class;
+        return \Bkfdev\FacebookPixel\FacebookPixel::class;
     }
 }

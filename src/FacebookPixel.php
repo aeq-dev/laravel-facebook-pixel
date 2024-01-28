@@ -1,6 +1,6 @@
 <?php
 
-namespace Combindma\FacebookPixel;
+namespace Bkfdev\FacebookPixel;
 
 use Exception;
 use FacebookAds\Api;
@@ -25,6 +25,7 @@ class FacebookPixel
     private bool $enabled;
 
     private string $pixelId;
+    private array $pixelIds;
 
     private ?string $token;
 
@@ -40,13 +41,23 @@ class FacebookPixel
 
     private UserData $userData;
 
-    public function __construct()
+    public function __construct(array $data = [])
     {
-        $this->enabled = config('facebook-pixel.enabled');
-        $this->pixelId = config('facebook-pixel.facebook_pixel_id');
-        $this->token = config('facebook-pixel.token');
-        $this->sessionKey = config('facebook-pixel.sessionKey');
-        $this->testEventCode = config('facebook-pixel.test_event_code');
+        if (count($data)) {
+            $this->enabled = $data['enabled'];
+            $this->pixelId = $data['facebook_pixel_id'];
+            $this->pixelIds = $data['facebook_pixel_ids'];
+            $this->token = $data['token'];
+            $this->sessionKey = $data['sessionKey'];
+            $this->testEventCode = $data['test_event_code'];
+        } else {
+            $this->enabled = config('facebook-pixel.enabled');
+            $this->pixelId = config('facebook-pixel.facebook_pixel_id');
+            $this->pixelIds = config('facebook-pixel.facebook_pixel_ids');
+            $this->token = config('facebook-pixel.token');
+            $this->sessionKey = config('facebook-pixel.sessionKey');
+            $this->testEventCode = config('facebook-pixel.test_event_code');
+        }
         $this->eventLayer = new EventLayer();
         $this->customEventLayer = new EventLayer();
         $this->flashEventLayer = new EventLayer();
@@ -57,6 +68,12 @@ class FacebookPixel
     {
         return (string) $this->pixelId;
     }
+
+    public function pixelIds(): array
+    {
+        return (array) $this->pixelIds;
+    }
+
 
     public function sessionKey()
     {
@@ -91,6 +108,11 @@ class FacebookPixel
     public function setPixelId(int|string $id): void
     {
         $this->pixelId = (string) $id;
+    }
+
+    public function setPixelIds(array $ids): void
+    {
+        $this->pixelIds = $ids;
     }
 
     /**
@@ -141,7 +163,7 @@ class FacebookPixel
      */
     public function send(string $eventName, string $eventID, CustomData $customData, ?UserData $userData = null): ?EventResponse
     {
-        if (! $this->isEnabled()) {
+        if (!$this->isEnabled()) {
             return null;
         }
         if (empty($this->token())) {

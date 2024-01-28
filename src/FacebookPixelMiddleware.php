@@ -1,6 +1,6 @@
 <?php
 
-namespace Combindma\FacebookPixel;
+namespace Bkfdev\FacebookPixel;
 
 use Closure;
 use Illuminate\Session\Store as Session;
